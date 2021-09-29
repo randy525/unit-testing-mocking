@@ -23,6 +23,8 @@ public class BasicValidationServiceTest {
         assertEquals(exception.getMessage(), "Amount must be greater than 0");
     }
 
+    //
+
     @Test
     public void validatePaymentId() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> validationService.validatePaymentId(null));
