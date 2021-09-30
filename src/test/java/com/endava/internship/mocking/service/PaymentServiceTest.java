@@ -3,7 +3,6 @@ package com.endava.internship.mocking.service;
 import com.endava.internship.mocking.model.Payment;
 import com.endava.internship.mocking.model.Status;
 import com.endava.internship.mocking.model.User;
-import com.endava.internship.mocking.repository.InMemPaymentRepository;
 import com.endava.internship.mocking.repository.PaymentRepository;
 import com.endava.internship.mocking.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,7 +33,7 @@ class PaymentServiceTest {
     }
 
     @Test
-    void createPaymentInteractionWithCollaboratorsCheck() {
+    void testCreatePaymentForExistentUser() {
         User expectedUser = new User(0, "John", Status.ACTIVE);
 
         when(userRepositoryMock.findById(anyInt())).thenReturn(Optional.of(expectedUser));
@@ -59,10 +58,6 @@ class PaymentServiceTest {
         verifyNoMoreInteractions(userRepositoryMock);
     }
 
-    @Test
-    void createPaymentSearchingForNonExistentUser() {
-        assertThrows(NoSuchElementException.class, () -> paymentService.createPayment(0, 150.5));
-    }
 
     @Test
     void editMessageInteractionWithCollaboratorsCheck() {
