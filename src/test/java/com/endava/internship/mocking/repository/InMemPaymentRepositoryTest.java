@@ -23,10 +23,17 @@ public class InMemPaymentRepositoryTest {
     void findById() {
         User expectedUser = new User(1, "John", Status.ACTIVE);
 
+        assertEquals(userRepository.findById(1), Optional.of(expectedUser));
+    }
+
+    @Test
+    void whenPutNullThrowException() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> userRepository.findById(null));
         assertEquals(exception.getMessage(), "User id must not be null");
+    }
 
+    @Test
+    void whenPutIdOfNotExistingUser() {
         assertEquals(userRepository.findById(0), Optional.empty());
-        assertEquals(userRepository.findById(1), Optional.of(expectedUser));
     }
 }
